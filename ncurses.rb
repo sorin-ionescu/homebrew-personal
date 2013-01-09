@@ -1,13 +1,16 @@
 require 'formula'
 
 class Ncurses < Formula
-  url 'http://ftpmirror.gnu.org/ncurses/ncurses-5.9.tar.gz'
   homepage 'http://www.gnu.org/s/ncurses/'
+  url 'http://ftpmirror.gnu.org/ncurses/ncurses-5.9.tar.gz'
+  mirror 'http://ftp.gnu.org/gnu/ncurses/ncurses-5.9.tar.gz'
   sha1 '3e042e5f2c7223bffdaac9646a533b8c758b65b5'
 
-  keg_only :provided_by_osx
+  option :universal
 
   def install
+    ENV.universal_binary if build.universal?
+
     system "./configure", "--disable-debug",
                           "--disable-dependency-tracking",
                           "--prefix=#{prefix}",
