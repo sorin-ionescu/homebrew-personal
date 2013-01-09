@@ -1,9 +1,10 @@
 require 'formula'
 
 class GnuGrep < Formula
-  url 'http://ftpmirror.gnu.org/grep/grep-2.10.tar.xz'
   homepage 'http://www.gnu.org/software/grep/'
-  md5 '709915434d09f5db655e5ebd7fd6bb7f'
+  url 'http://ftpmirror.gnu.org/grep/grep-2.14.tar.xz'
+  mirror 'http://ftp.gnu.org/gnu/grep/grep-2.14.tar.xz'
+  sha1 'fb6ea404a0ef915334ca6212c7b517432ffe193e'
 
   depends_on 'pcre'
 
