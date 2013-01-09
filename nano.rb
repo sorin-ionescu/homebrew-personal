@@ -1,9 +1,9 @@
 require 'formula'
 
 class Nano < Formula
-  url 'http://www.nano-editor.org/dist/v2.2/nano-2.2.6.tar.gz'
   homepage 'http://www.nano-editor.org/'
-  md5 '03233ae480689a008eb98feb1b599807'
+  url 'http://www.nano-editor.org/dist/v2.2/nano-2.2.6.tar.gz'
+  sha1 'f2a628394f8dda1b9f28c7e7b89ccb9a6dbd302a'
 
   depends_on "gettext"
   depends_on "libiconv"
