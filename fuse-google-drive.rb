@@ -10,7 +10,7 @@ class FuseGoogleDrive < Formula
   depends_on 'libxml2'
 
   def install
-    system "./autogen.sh" if ARGV.build_head?
+    system "./autogen.sh" if build.head?
     system "./configure", "--disable-debug", "--disable-dependency-tracking",
                           "--prefix=#{prefix}"
     system "make"
