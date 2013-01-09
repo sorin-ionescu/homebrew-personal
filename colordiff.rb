@@ -1,9 +1,9 @@
 require 'formula'
 
 class Colordiff < Formula
-  homepage 'http://colordiff.sourceforge.net/'
-  url 'http://colordiff.sourceforge.net/colordiff-1.0.10.tar.gz'
-  sha1 'eeedbe025b9f250134d91fd68fd3940748bbe102'
+  homepage 'http://www.colordiff.org/'
+  url 'http://www.colordiff.org/colordiff-1.0.13.tar.gz'
+  sha1 '64e369aed2230f3aa5f1510b231fcac270793c09'
 
   def patches
     # Fixes the path to colordiffrc.
@@ -22,20 +22,20 @@ class Colordiff < Formula
   end
 end
 __END__
-diff --git 1/a/colordiff.pl 2/b/colordiff.pl
-index 9e74e5c..c0649aa 100755
---- a/colordiff.pl
-+++ b/colordiff.pl
+diff --git i/colordiff.pl w/colordiff.pl
+index 79376b5..8cece49 100755
+--- i/colordiff.pl
++++ w/colordiff.pl
 @@ -23,6 +23,7 @@
-
+ 
  use strict;
- use Getopt::Long qw(:config pass_through);
+ use Getopt::Long qw(:config pass_through no_auto_abbrev);
 +use File::Basename;
  use IPC::Open2;
-
+ 
  my $app_name     = 'colordiff';
-@@ -63,7 +64,7 @@ my $cvs_stuff  = $colour{green};
-
+@@ -64,7 +65,7 @@ my $cvs_stuff  = $colour{green};
+ 
  # Locations for personal and system-wide colour configurations
  my $HOME   = $ENV{HOME};
 -my $etcdir = '/etc';
@@ -43,22 +43,22 @@ index 9e74e5c..c0649aa 100755
  my ($setting, $value);
  my @config_files = ("$etcdir/colordiffrc");
  push (@config_files, "$ENV{HOME}/.colordiffrc") if (defined $ENV{HOME});
-@@ -418,8 +419,8 @@ foreach (@inputstream) {
+@@ -480,8 +481,8 @@ foreach (@inputstream) {
          }
      }
      elsif ($diff_type eq 'wdiff') {
--        $_ =~ s/(\[-[^]]*?-\])/$file_old$1$colour{off}/g;
--        $_ =~ s/(\{\+[^]]*?\+\})/$file_new$1$colour{off}/g;
+-        $_ =~ s/(\[-.+?-\])/$file_old$1$colour{off}/g;
+-        $_ =~ s/(\{\+.+?\+\})/$file_new$1$colour{off}/g;
 +        $_ =~ s/(\[-([^-]*(-[^]])?)*-\])/$file_old$1$colour{off}/g;
 +        $_ =~ s/(\{\+([^+]*(\+[^}])?)*\+\})/$file_new$1$colour{off}/g;
      }
      elsif ($diff_type eq 'debdiff') {
-         $_ =~ s/(\[-[^]]*?-\])/$file_old$1$colour{off}/g;
-diff --git 1/a/colordiffrc 2/b/colordiffrc
-index 6e75b2b..7712014 100644
---- a/colordiffrc
-+++ b/colordiffrc
-@@ -20,7 +20,7 @@ color_patches=no
+         $_ =~ s/(\[-.+?-\])/$file_old$1$colour{off}/g;
+diff --git i/colordiffrc w/colordiffrc
+index 4bcb02d..c46043e 100644
+--- i/colordiffrc
++++ w/colordiffrc
+@@ -23,7 +23,7 @@ diff_cmd=diff
  # this, use the default output colour"
  #
  plain=off
