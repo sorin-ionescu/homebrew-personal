@@ -20,6 +20,12 @@ class Colordiff < Formula
     man1.install "colordiff.1"
     man1.install "cdiff.1"
   end
+
+  test do
+    cp HOMEBREW_PREFIX+'bin/brew', 'brew1'
+    cp HOMEBREW_PREFIX+'bin/brew', 'brew2'
+    system "#{bin}/colordiff", 'brew1', 'brew2'
+  end
 end
 __END__
 diff --git i/colordiff.pl w/colordiff.pl
@@ -27,15 +33,15 @@ index 79376b5..8cece49 100755
 --- i/colordiff.pl
 +++ w/colordiff.pl
 @@ -23,6 +23,7 @@
- 
+
  use strict;
  use Getopt::Long qw(:config pass_through no_auto_abbrev);
 +use File::Basename;
  use IPC::Open2;
- 
+
  my $app_name     = 'colordiff';
 @@ -64,7 +65,7 @@ my $cvs_stuff  = $colour{green};
- 
+
  # Locations for personal and system-wide colour configurations
  my $HOME   = $ENV{HOME};
 -my $etcdir = '/etc';
