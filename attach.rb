@@ -1,9 +1,9 @@
 require 'formula'
 
 class Attach < Formula
-  url 'https://github.com/sorin-ionescu/attach/archive/1.0.7'
-  head 'https://github.com/sorin-ionescu/attach.git'
+  url 'https://github.com/sorin-ionescu/attach/archive/1.0.7.tar.gz'
   homepage 'https://github.com/sorin-ionescu/attach'
+  head 'https://github.com/sorin-ionescu/attach.git'
 
   depends_on 'dtach'
 
