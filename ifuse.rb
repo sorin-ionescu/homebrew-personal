@@ -23,8 +23,12 @@ class Ifuse < Formula
       ENV.append_path 'PKG_CONFIG_PATH', '/usr/local/lib/pkgconfig'
     end
 
-    system "./configure", "--disable-dependency-tracking",
+    system "./autogen.sh" if build.head?
+    system "./configure", "--disable-debug",
+                          "--disable-dependency-tracking",
+                          "--disable-silent-rules",
                           "--prefix=#{prefix}"
+
     system "make install"
   end
 
