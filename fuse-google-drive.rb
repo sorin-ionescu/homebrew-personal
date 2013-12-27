@@ -21,6 +21,10 @@ class FuseGoogleDrive < Formula
     system "make install"
   end
 
+  test do
+    system "fuse-google-drive", "--version"
+  end
+
   def caveats
     <<-EOS.undent
       Make sure to follow the directions given by `brew info osxfuse`

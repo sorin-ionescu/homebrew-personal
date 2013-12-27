@@ -12,4 +12,8 @@ class Dvtm < Formula
     inreplace 'Makefile', 'strip -s', 'strip'
     system "make", "PREFIX=#{prefix}", "install"
   end
+
+  test do
+    system "dvtm", "-v"
+  end
 end

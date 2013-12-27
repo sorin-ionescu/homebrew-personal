@@ -9,4 +9,8 @@ class Growlnotify < Formula
     bin.install "growlnotify"
     man1.install gzip("growlnotify.1")
   end
+
+  test do
+    system "growlnotify", "--version"
+  end
 end

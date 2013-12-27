@@ -32,6 +32,10 @@ class Ifuse < Formula
     system "make install"
   end
 
+  test do
+    system "ifuse", "--version"
+  end
+
   def caveats
     <<-EOS.undent
       Make sure to follow the directions given by `brew info osxfuse`

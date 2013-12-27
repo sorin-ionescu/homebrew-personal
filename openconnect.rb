@@ -40,4 +40,8 @@ class Openconnect < Formula
     and install it prior to running OpenConnect.
     EOS
   end
+
+  test do
+    system "openconnect", "--version"
+  end
 end

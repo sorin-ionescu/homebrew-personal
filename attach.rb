@@ -12,5 +12,9 @@ class Attach < Formula
     bin.install 'attach'
     man1.install 'attach.1'
   end
+
+  test do
+    system "attach", "--version"
+  end
 end
 

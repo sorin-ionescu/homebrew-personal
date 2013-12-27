@@ -16,6 +16,10 @@ class Fbcmd < Formula
     (lib + 'fbcmd').install 'fbcmd_update_dummy.php' => 'fbcmd_update.php'
     (lib + 'fbcmd').install 'facebook'
   end
+
+  test do
+    system "fbcmd", "help"
+  end
 end
 __END__
 diff --git c/fbcmd i/fbcmd

@@ -8,4 +8,8 @@ class ItunesNotify < Formula
     system 'cc itunes-notify.c -framework CoreFoundation -o itunes-notify'
     bin.install 'itunes-notify'
   end
+
+  test do
+    system "itunes-notify"
+  end
 end

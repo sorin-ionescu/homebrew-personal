@@ -29,4 +29,8 @@ class Nano < Formula
                           "--with-ncurses=#{HOMEBREW_PREFIX}"
     system "make install"
   end
+
+  test do
+    system "nano", "--version"
+  end
 end

@@ -16,4 +16,8 @@ class GnuGrep < Formula
     system "make"
     system "make install"
   end
+
+  test do
+    system "ggrep", "--version"
+  end
 end
