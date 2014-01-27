@@ -20,6 +20,7 @@ class Ncurses < Formula
 
   def install
     ENV.universal_binary if build.universal?
+    ENV['PKG_CONFIG_LIBDIR'] = "#{lib}/pkgconfig"
 
     system "./configure", "--disable-debug",
                           "--disable-dependency-tracking",
@@ -31,6 +32,7 @@ class Ncurses < Formula
                           "--enable-sigwinch",
                           "--mandir=#{man}",
                           "--with-manpage-format=normal",
+                          "--with-pkg-config=#{lib}/pkgconfig",
                           "--enable-pc-files",
                           "--enable-symlinks",
                           "--disable-mixed-case"
