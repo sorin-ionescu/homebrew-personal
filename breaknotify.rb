@@ -1,8 +1,10 @@
 require 'formula'
 
 class Breaknotify < Formula
+  url 'https://github.com/sorin-ionescu/breaknotify.git', :revision => 'c1447c4f9a'
   homepage 'https://github.com/sorin-ionescu/breaknotify'
   head 'https://github.com/sorin-ionescu/breaknotify.git'
+  version '20130226'
 
   depends_on 'growl-framework'
 

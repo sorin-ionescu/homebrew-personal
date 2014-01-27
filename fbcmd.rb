@@ -1,9 +1,10 @@
 require 'formula'
 
 class Fbcmd < Formula
-  # There are currently no tarballs.
+  url 'https://github.com/dtompkins/fbcmd.git', :revision => '159efc0c9f'
   homepage 'http://fbcmd.dtompkins.com'
   head 'https://github.com/dtompkins/fbcmd.git'
+  version '20120718'
 
   def patches
     # The executable file that will run fbcmd and a dummy update script.

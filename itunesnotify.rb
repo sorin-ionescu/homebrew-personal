@@ -1,8 +1,10 @@
 require 'formula'
 
 class Itunesnotify < Formula
+  url 'https://github.com/sorin-ionescu/itunesnotify.git', :revision => '640ebc19c6'
   homepage 'https://github.com/sorin-ionescu/itunesnotify'
   head 'https://github.com/sorin-ionescu/itunesnotify.git'
+  version '20130306'
 
   depends_on 'growl-framework'
 
