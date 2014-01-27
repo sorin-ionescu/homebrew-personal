@@ -6,7 +6,7 @@ class Dvtm < Formula
   sha1 '00e3d6cb746f8eace07e6784452d53781e76db13'
   head 'git://repo.or.cz/dvtm.git'
 
-  depends_on 'ncurses'
+  depends_on "sorin-ionescu/personal/ncurses"
 
   def install
     inreplace 'Makefile', 'strip -s', 'strip'

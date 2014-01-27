@@ -13,7 +13,7 @@ class Nano < Formula
 
   depends_on "gettext"
   depends_on "libiconv"
-  depends_on "ncurses"
+  depends_on "sorin-ionescu/personal/ncurses"
 
   def install
     system "./configure", "--disable-debug",
