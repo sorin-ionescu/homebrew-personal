@@ -3,7 +3,7 @@ require 'formula'
 class Growlnotify < Formula
   homepage 'http://growl.info/extras.php#growlnotify'
   url 'https://github.com/indirect/growlnotify/archive/v1.3.tar.gz'
-  sha1 '928047d8561041f4a0c402751768ff870bfcdf6d'
+  sha1 'fcfcd8d939994af2303bb7ce65e4ae839d7e216b'
 
   def install
     bin.install "growlnotify"
