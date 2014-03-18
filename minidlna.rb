@@ -1,9 +1,9 @@
 require 'formula'
 
 class Minidlna < Formula
-  url 'http://downloads.sourceforge.net/project/minidlna/minidlna/1.1.1/minidlna-1.1.1.tar.gz'
+  url 'https://downloads.sourceforge.net/project/minidlna/minidlna/1.1.2/minidlna-1.1.2.tar.gz'
   homepage 'http://sourceforge.net/projects/minidlna/'
-  sha1 '97c28d2b861957620d319929f904225e906830c7'
+  sha1 'ba03d691b9aa95b55ac822905571ab1127492344'
   head 'http://git.code.sf.net/p/minidlna/git', :using => :git
 
   option 'with-tivo', 'Build with TiVo support'
