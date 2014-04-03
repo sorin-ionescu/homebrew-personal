@@ -16,7 +16,7 @@ class Osxfuse < Formula
   homepage 'http://osxfuse.github.io'
   url 'http://example.com', :using => :nounzip
   sha1 '0e973b59f476007fd10f87f347c3956065516fc0'
-  version '2.6.3'
+  version '2.6.4'
 
   depends_on OsxfuseInstalled
   depends_on :macos => :snow_leopard
