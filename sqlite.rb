@@ -1,56 +1,67 @@
-require 'formula'
+require "formula"
 
 class Sqlite < Formula
-  homepage 'http://sqlite.org/'
-  url 'http://sqlite.org/2014/sqlite-autoconf-3080403.tar.gz'
-  version '3.8.4.3'
-  sha1 '70f3b100fa22e5bfebfe1b0a2102612e3c6c53fb'
+  homepage "http://sqlite.org/"
+  url "http://sqlite.org/2014/sqlite-autoconf-3080600.tar.gz"
+  version "3.8.6"
+  sha1 "c4b2911bc4a6e1dc2b411aa21d8c4f524113eb64"
 
   bottle do
     cellar :any
-    sha1 "f8099e15c5ffd67f861ea09651cb7ae0c4dfa359" => :mavericks
-    sha1 "c25f37d9cd188465dd568e9f49c22b95a2320835" => :mountain_lion
-    sha1 "d40eacfc3df225d16dc0908bf450b47a27a27d44" => :lion
+    sha1 "69df469595af0cda3be25b4f7a5ecab55c5c4779" => :mavericks
+    sha1 "34514fc4ff5002b51beb3f4075cf048d7d60c804" => :mountain_lion
+    sha1 "67bac5a23611b5cd630a3d52b7b82ac27600c836" => :lion
   end
 
   keg_only :provided_by_osx, "OS X provides an older sqlite3."
 
   option :universal
-  option 'with-docs', 'Install HTML documentation'
-  option 'without-rtree', 'Disable the R*Tree index module'
-  option 'with-fts', 'Enable the FTS module'
-  option 'with-functions', 'Enable more math and string functions for SQL queries'
-  option 'with-regexp', 'Enable regular expressions for SQL queries'
+  option "with-docs", "Install HTML documentation"
+  option "without-rtree", "Disable the R*Tree index module"
+  option "with-fts", "Enable the FTS module"
+  option "with-icu4c", "Enable the ICU module"
+  option "with-functions", "Enable more math and string functions for SQL queries"
+  option "with-regexp", "Enable regular expressions for SQL queries"
 
-  depends_on 'readline' => :recommended
+  depends_on "readline" => :recommended
+  depends_on "icu4c" => :optional
 
-  if build.with? 'regexp'
-    depends_on 'pkg-config' => :build
-    depends_on 'pcre'
+  if build.with? "regexp"
+    depends_on "pkg-config" => :build
+    depends_on "pcre"
   end
 
-  resource 'functions' do
-    url 'http://www.sqlite.org/contrib/download/extension-functions.c?get=25', :using  => :nounzip
-    version '2010-01-06'
-    sha1 'c68fa706d6d9ff98608044c00212473f9c14892f'
+  resource "functions" do
+    url "http://www.sqlite.org/contrib/download/extension-functions.c?get=25", :using  => :nounzip
+    version "2010-01-06"
+    sha1 "c68fa706d6d9ff98608044c00212473f9c14892f"
   end
 
-  resource 'regexp' do
-    url 'https://raw2.github.com/ralight/sqlite3-pcre/c98da412b431edb4db22d3245c99e6c198d49f7a/pcre.c', :using  => :nounzip
-    version '2010-02-08'
-    sha1 'fcc2355570e648ecb9a525252590c3770b04b3ac'
+  resource "regexp" do
+    url "https://raw2.github.com/ralight/sqlite3-pcre/c98da412b431edb4db22d3245c99e6c198d49f7a/pcre.c", :using  => :nounzip
+    version "2010-02-08"
+    sha1 "fcc2355570e648ecb9a525252590c3770b04b3ac"
   end
 
-  resource 'docs' do
-    url 'http://sqlite.org/2014/sqlite-doc-3080402.zip'
-    version '3.8.4.2'
-    sha1 '3f615f9fa81b737e652b06eddef8307235d84f2c'
+  resource "docs" do
+    url "http://sqlite.org/2014/sqlite-doc-3080600.zip"
+    version "3.8.6"
+    sha1 "8c3d3a9f97b10fb43d6fce61079ed1ab93472913"
   end
 
   def install
-    ENV.append 'CPPFLAGS', "-DSQLITE_ENABLE_RTREE" if build.with? "rtree"
-    ENV.append 'CPPFLAGS', "-DSQLITE_ENABLE_FTS3 -DSQLITE_ENABLE_FTS3_PARENTHESIS" if build.with? "fts"
-    ENV.append 'CPPFLAGS', "-DSQLITE_ENABLE_COLUMN_METADATA"
+    ENV.append "CPPFLAGS", "-DSQLITE_ENABLE_RTREE" if build.with? "rtree"
+    ENV.append "CPPFLAGS", "-DSQLITE_ENABLE_FTS3 -DSQLITE_ENABLE_FTS3_PARENTHESIS" if build.with? "fts"
+    ENV.append "CPPFLAGS", "-DSQLITE_ENABLE_COLUMN_METADATA"
+
+    if build.with? "icu4c"
+      icu4c = Formula['icu4c']
+      icu4cldflags = `#{icu4c.opt_bin}/icu-config --ldflags`.tr("\n", " ")
+      icu4ccppflags = `#{icu4c.opt_bin}/icu-config --cppflags`.tr("\n", " ")
+      ENV.append "LDFLAGS", icu4cldflags
+      ENV.append "CPPFLAGS", icu4ccppflags
+      ENV.append 'CPPFLAGS', "-DSQLITE_ENABLE_ICU"
+    end
 
     ENV.universal_binary if build.universal?
 
@@ -58,20 +69,20 @@ class Sqlite < Formula
     system "make install"
 
     if build.with? "functions"
-      buildpath.install resource('functions')
+      buildpath.install resource("functions")
       system ENV.cc, "-fno-common",
                      "-dynamiclib",
                      "extension-functions.c",
                      "-o", "libsqlite3-functions.dylib",
-                     *ENV.cflags.split
+                     *ENV.cflags.to_s.split
       lib.install "libsqlite3-functions.dylib"
     end
 
     if build.with? "regexp"
-      buildpath.install resource('regexp')
-      ENV.append_path 'PKG_CONFIG_PATH', lib + 'pkgconfig'
-      ENV.append 'CFLAGS', `pkg-config --cflags sqlite3 libpcre`.chomp.strip
-      ENV.append 'LDFLAGS', `pkg-config --libs libpcre`.chomp.strip
+      buildpath.install resource("regexp")
+      ENV.append_path "PKG_CONFIG_PATH", lib + "pkgconfig"
+      ENV.append "CFLAGS", `pkg-config --cflags sqlite3 libpcre`.chomp.strip
+      ENV.append "LDFLAGS", `pkg-config --libs libpcre`.chomp.strip
       system ENV.cc, "-fno-common",
                      "-dynamiclib",
                      "pcre.c",
@@ -80,12 +91,12 @@ class Sqlite < Formula
       lib.install "libsqlite3-regexp.dylib"
     end
 
-    doc.install resource('docs') if build.with? "docs"
+    doc.install resource("docs") if build.with? "docs"
   end
 
   def caveats
-    msg = ''
-    if build.with? 'functions' or build.with? "regexp" then msg += <<-EOS.undent
+    msg = ""
+    if build.with? "functions" or build.with? "regexp" then msg += <<-EOS.undent
       Usage instructions for applications calling the SQLite3 API functions:
 
           In your application, call sqlite3_enable_load_extension(db, TRUE) to
