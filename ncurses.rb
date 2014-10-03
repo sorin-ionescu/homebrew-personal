@@ -11,12 +11,14 @@ class Ncurses < Formula
   option :universal
 
   # Fix building C++ bindings with clang
-  def patches
-    { :p0 => "https://trac.macports.org/export/103963/trunk/dports/devel/ncurses/files/constructor_types.diff",
-      # Stop using obsolete -no-cpp-precomp flag, which breaks FSF GCC
-      # Reported upstream by email
-      :p1 => DATA }
+  patch :p0 do
+    url "https://trac.macports.org/export/103963/trunk/dports/devel/ncurses/files/constructor_types.diff"
+    sha1 "60f3e64c7793381307e2a3849df7ae282e46c36e"
   end
+
+  # Stop using obsolete -no-cpp-precomp flag, which breaks FSF GCC
+  # Reported upstream by email
+  patch :DATA
 
   def install
     ENV.universal_binary if build.universal?
