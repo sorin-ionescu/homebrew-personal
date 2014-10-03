@@ -15,6 +15,10 @@ class Nano < Formula
   depends_on "libiconv"
   depends_on "sorin-ionescu/personal/ncurses"
 
+  # Fixes regex in the default nanorc.nanorc; fixed upstream:
+  # http://savannah.gnu.org/bugs/index.php?42929
+  patch :DATA
+
   def install
     system "./configure", "--disable-debug",
                           "--disable-dependency-tracking",
@@ -34,3 +38,19 @@ class Nano < Formula
     system "nano", "--version"
   end
 end
+
+
+__END__
+diff --git a/doc/syntax/nanorc.nanorc b/doc/syntax/nanorc.nanorc
+index fd66d6b..6e52942 100644
+--- a/doc/syntax/nanorc.nanorc
++++ b/doc/syntax/nanorc.nanorc
+@@ -7,7 +7,7 @@ icolor brightred "^[[:space:]]*((un)?(bind|set)|include|syntax|header|magic|lint
+ 
+ # Keywords
+ icolor brightgreen "^[[:space:]]*(set|unset)[[:space:]]+(allow_insecure_backup|autoindent|backup|backwards|boldtext|casesensitive|const|cut|fill|historylog|locking|morespace|mouse|multibuffer|noconvert|nofollow|nohelp|nonewlines|nowrap|poslog|preserve|quickblank|quiet|rebinddelete|rebindkeypad|regexp|smarthome|smooth|softwrap|suspend|tabsize|tabstospaces|tempfile|undo|view|wordbounds)\>"
+-icolor yellow "^[[:space:]]*set[[:space:]]+(functioncolor|keycolor||statuscolor|titlecolor)[[:space:]]+(bright)?(white|black|red|blue|green|yellow|magenta|cyan)?(,(white|black|red|blue|green|yellow|magenta|cyan))?\>"
++icolor yellow "^[[:space:]]*set[[:space:]]+(functioncolor|keycolor|statuscolor|titlecolor)[[:space:]]+(bright)?(white|black|red|blue|green|yellow|magenta|cyan)?(,(white|black|red|blue|green|yellow|magenta|cyan))?\>"
+ icolor brightgreen "^[[:space:]]*set[[:space:]]+(backupdir|brackets|functioncolor|keycolor|matchbrackets|operatingdir|punct|quotestr|speller|statuscolor|titlecolor|whitespace)[[:space:]]+"
+ icolor brightgreen "^[[:space:]]*bind[[:space:]]+((\^|M-)([[:alpha:]]|space|[]]|[0-9_=+{}|;:'\",./<>\?-])|F([1-9]|1[0-6])|Ins|Del)[[:space:]]+[[:alpha:]]+[[:space:]]+[[:alpha:]]+[[:space:]]*$"
+ icolor brightgreen "^[[:space:]]*unbind[[:space:]]+((\^|M-)([[:alpha:]]|space|[]]|[0-9_=+{}|;:'\",./<>\?-])|F([1-9]|1[0-6])|Ins|Del)[[:space:]]+[[:alpha:]]+[[:space:]]*$"
