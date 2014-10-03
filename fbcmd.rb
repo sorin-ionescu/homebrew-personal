@@ -6,10 +6,8 @@ class Fbcmd < Formula
   head 'https://github.com/dtompkins/fbcmd.git'
   version '20120718'
 
-  def patches
-    # The executable file that will run fbcmd and a dummy update script.
-    DATA
-  end
+  # Adds the executable file that will run fbcmd and a dummy update script.
+  patch :DATA
 
   def install
     bin.install 'fbcmd'
