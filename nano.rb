@@ -7,8 +7,8 @@ class Nano < Formula
   head 'svn://svn.sv.gnu.org/nano/trunk/nano'
 
   devel do
-    url 'http://www.nano-editor.org/dist/v2.3/nano-2.3.2.tar.gz'
-    sha1 '5d4bed4f15088fc3cba0650a89bd343b061f456d'
+    url 'http://www.nano-editor.org/dist/v2.3/nano-2.3.6.tar.gz'
+    sha1 '7dd39f21bbb1ab176158e0292fd61c47ef681f6d'
   end
 
   depends_on "gettext"
