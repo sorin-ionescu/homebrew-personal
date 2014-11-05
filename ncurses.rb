@@ -24,20 +24,15 @@ class Ncurses < Formula
     ENV.universal_binary if build.universal?
     ENV['PKG_CONFIG_LIBDIR'] = "#{lib}/pkgconfig"
 
-    system "./configure", "--disable-debug",
-                          "--disable-dependency-tracking",
-                          "--prefix=#{prefix}",
-                          "--enable-widec",
-                          "--enable-overwrite",
-                          "--with-shared",
-                          "--without-ada",
+    system "./configure", "--prefix=#{prefix}",
+                          "--enable-pc-files",
                           "--enable-sigwinch",
+                          "--enable-symlinks",
+                          "--enable-widec",
                           "--mandir=#{man}",
                           "--with-manpage-format=normal",
                           "--with-pkg-config=#{lib}/pkgconfig",
-                          "--enable-pc-files",
-                          "--enable-symlinks",
-                          "--disable-mixed-case"
+                          "--with-shared"
 
     system "make"
     system "make install"
