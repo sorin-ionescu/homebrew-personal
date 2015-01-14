@@ -70,7 +70,7 @@ class Minidlna < Formula
 
     args << "--enable-tivo" if build.with? 'tivo'
 
-    system './autogen.sh' if build.head?
+    system './autogen.sh'
     system './configure', *args
     system 'make'
 
