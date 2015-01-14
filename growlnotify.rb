@@ -1,5 +1,3 @@
-require 'formula'
-
 class Growlnotify < Formula
   homepage 'http://growl.info/extras.php#growlnotify'
   url 'https://github.com/indirect/growlnotify/archive/v1.3.tar.gz'

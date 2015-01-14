@@ -1,5 +1,3 @@
-require 'formula'
-
 class Atach < Formula
   url 'https://github.com/sorin-ionescu/attach/archive/v1.0.8.tar.gz'
   homepage 'https://github.com/sorin-ionescu/atach'

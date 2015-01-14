@@ -1,5 +1,3 @@
-require 'formula'
-
 class Colordiff < Formula
   homepage 'http://www.colordiff.org/'
   url 'http://www.colordiff.org/colordiff-1.0.13.tar.gz'

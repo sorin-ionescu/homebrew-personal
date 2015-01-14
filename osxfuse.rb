@@ -1,5 +1,3 @@
-require 'formula'
-
 class OsxfuseInstalled < Requirement
   fatal true
 

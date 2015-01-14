@@ -1,5 +1,3 @@
-require 'formula'
-
 class GnuGrep < Formula
   homepage 'http://www.gnu.org/software/grep/'
   url 'http://ftpmirror.gnu.org/grep/grep-2.20.tar.xz'

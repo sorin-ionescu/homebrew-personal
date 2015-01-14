@@ -1,5 +1,3 @@
-require "formula"
-
 class Dvtm < Formula
   homepage "http://www.brain-dump.org/projects/dvtm/"
   url "http://www.brain-dump.org/projects/dvtm/dvtm-0.12.tar.gz"

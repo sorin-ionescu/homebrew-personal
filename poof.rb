@@ -1,5 +1,3 @@
-require "formula"
-
 class Poof < Formula
   homepage "https://github.com/ruda/poof"
   url "https://github.com/ruda/poof/archive/2013.tar.gz"

@@ -1,5 +1,3 @@
-require 'formula'
-
 class ItunesNotify < Formula
   url 'http://cmus.sourceforge.net/wiki/lib/exe/fetch.php?media=itunes-notify.c.zip'
   homepage 'http://cmus.sourceforge.net/wiki/doku.php?id=status_display_programs'

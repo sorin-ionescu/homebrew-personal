@@ -1,5 +1,3 @@
-require 'formula'
-
 class Minidlna < Formula
   url 'https://downloads.sourceforge.net/project/minidlna/minidlna/1.1.4/minidlna-1.1.4.tar.gz'
   homepage 'http://sourceforge.net/projects/minidlna/'

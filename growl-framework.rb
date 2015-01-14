@@ -1,5 +1,3 @@
-require 'formula'
-
 class GrowlFramework < Formula
   homepage 'http://growl.info'
   url 'http://growl.cachefly.net/Growl-2.0.1-SDK.zip'

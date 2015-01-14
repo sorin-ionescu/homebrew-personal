@@ -1,5 +1,3 @@
-require 'formula'
-
 class Fbcmd < Formula
   url 'https://github.com/dtompkins/fbcmd.git', :revision => '159efc0c9f'
   homepage 'http://fbcmd.dtompkins.com'
