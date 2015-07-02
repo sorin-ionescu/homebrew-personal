@@ -11,10 +11,11 @@ class OsxfuseInstalled < Requirement
 end
 
 class Osxfuse < Formula
+  desc "FUSE for OS X: extend native file handling via 3rd-party file systems"
   homepage 'http://osxfuse.github.io'
   url 'http://example.com', :using => :nounzip
   sha1 '0e973b59f476007fd10f87f347c3956065516fc0'
-  version '2.7.5'
+  version '2.7.6'
 
   depends_on OsxfuseInstalled
   depends_on :macos => :snow_leopard
