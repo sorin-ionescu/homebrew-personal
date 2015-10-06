@@ -1,8 +1,8 @@
 class GnuGrep < Formula
   homepage 'https://www.gnu.org/software/grep/'
-  url 'http://ftpmirror.gnu.org/grep/grep-2.20.tar.xz'
-  mirror 'https://ftp.gnu.org/gnu/grep/grep-2.20.tar.xz'
-  sha256 'f0af452bc0d09464b6d089b6d56a0a3c16672e9ed9118fbe37b0b6aeaf069a65'
+  url 'http://ftpmirror.gnu.org/grep/grep-2.21.tar.xz'
+  mirror 'https://ftp.gnu.org/gnu/grep/grep-2.21.tar.xz'
+  sha256 '5244a11c00dee8e7e5e714b9aaa053ac6cbfa27e104abee20d3c778e4bb0e5de'
 
   depends_on 'pcre'
 
