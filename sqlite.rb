@@ -42,7 +42,7 @@ class Sqlite < Formula
   resource "regexp" do
     url "https://raw.github.com/ralight/sqlite3-pcre/c98da412b431edb4db22d3245c99e6c198d49f7a/pcre.c", :using  => :nounzip
     version "2010-02-08"
-    sha1 "fcc2355570e648ecb9a525252590c3770b04b3ac"
+    sha256 "3173f4fa57f311c688886479873edce0f776f9567c8a9537a4747e9b4bb2c119"
   end
 
   resource "docs" do

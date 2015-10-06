@@ -14,7 +14,7 @@ class Osxfuse < Formula
   desc "FUSE for OS X: extend native file handling via 3rd-party file systems"
   homepage 'http://osxfuse.github.io'
   url 'http://example.com', :using => :nounzip
-  sha1 '0e973b59f476007fd10f87f347c3956065516fc0'
+  sha256 '3587cb776ce0e4e8237f215800b7dffba0f25865cb84550e87ea8bbac838c423'
   version '2.8.1'
 
   depends_on OsxfuseInstalled

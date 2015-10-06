@@ -1,7 +1,7 @@
 class Atach < Formula
   url 'https://github.com/sorin-ionescu/attach/archive/v1.0.8.tar.gz'
   homepage 'https://github.com/sorin-ionescu/atach'
-  sha1 '0150d6db71040d3e602cf628d677df843bbcedd3'
+  sha256 '11455bc26c00c83c2542c0d462d2d7d80caac297ea2b68af363ed1b1267ad610'
   head 'https://github.com/sorin-ionescu/atach.git'
 
   depends_on 'dtach'
