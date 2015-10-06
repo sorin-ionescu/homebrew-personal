@@ -19,7 +19,7 @@ class Osxfuse < Formula
 
   depends_on OsxfuseInstalled
   depends_on :macos => :snow_leopard
-  conflicts_with 'fuse4x', :because => 'both install `fuse.pc`'
+  conflicts_with 'homebrew/fuse/fuse4x', :because => 'both install `fuse.pc`'
 
   def install
     include.mkpath
