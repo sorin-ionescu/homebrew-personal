@@ -1,9 +1,16 @@
 class Sqlite < Formula
   desc "Command-line interface for SQLite"
   homepage "https://sqlite.org/"
-  url "https://sqlite.org/2015/sqlite-autoconf-3090100.tar.gz"
-  version "3.9.1"
-  sha256 "d89d0e1d93deafebd0aa067d20d9029d9914ccde244920d9dd09ea51944e1c6c"
+  url "https://sqlite.org/2015/sqlite-autoconf-3090200.tar.gz"
+  version "3.9.2"
+  sha256 "064c0abe9c9177534d4c770bca7a5902f9924b629ac886b4c08956be6dfbc36b"
+
+  bottle do
+    cellar :any
+    sha256 "87728b4a68575b2b26b21b20f9e175342dd951e5c723e3730cdfe094219d7870" => :el_capitan
+    sha256 "5904d6943b66ae30f2d1c2add3c39c23eeeec802adfb52d589a0baede082349a" => :yosemite
+    sha256 "26ca0151df66630ad513d3280fc010eeba4a8587143c8b3840916ded8717d889" => :mavericks
+  end
 
   keg_only :provided_by_osx, "OS X provides an older sqlite3."
 
@@ -41,16 +48,16 @@ class Sqlite < Formula
   end
 
   resource "docs" do
-    url "https://sqlite.org/2015/sqlite-doc-3090100.zip"
-    version "3.9.1"
-    sha256 "c8549a4261f74395496d1ebc4b7d36a51b2b3e57f36520d3c71052190a80ccb9"
+    url "https://sqlite.org/2015/sqlite-doc-3090200.zip"
+    version "3.9.2"
+    sha256 "4b9ecb9d2b0424ca2a288184ee36fa16a11033400638117dd7c669ad2d39177c"
   end
 
   def install
+    ENV.append "CPPFLAGS", "-DSQLITE_ENABLE_COLUMN_METADATA=1"
     ENV.append "CPPFLAGS", "-DSQLITE_ENABLE_RTREE=1" if build.with? "rtree"
     ENV.append "CPPFLAGS", "-DSQLITE_ENABLE_FTS3=1 -DSQLITE_ENABLE_FTS3_PARENTHESIS=1" if build.with? "fts"
     ENV.append "CPPFLAGS", "-DSQLITE_ENABLE_FTS5=1" if build.with? "fts5"
-    ENV.append "CPPFLAGS", "-DSQLITE_ENABLE_COLUMN_METADATA=1"
     ENV.append "CPPFLAGS", "-DSQLITE_SECURE_DELETE=1" if build.with? "secure-delete"
     ENV.append "CPPFLAGS", "-DSQLITE_ENABLE_UNLOCK_NOTIFY=1" if build.with? "unlock-notify"
     ENV.append "CPPFLAGS", "-DSQLITE_ENABLE_DBSTAT_VTAB=1" if build.with? "dbstat"
