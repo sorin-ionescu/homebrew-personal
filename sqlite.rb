@@ -1,15 +1,16 @@
 class Sqlite < Formula
   desc "Command-line interface for SQLite"
   homepage "https://sqlite.org/"
-  url "https://sqlite.org/2015/sqlite-autoconf-3090200.tar.gz"
-  version "3.9.2"
-  sha256 "064c0abe9c9177534d4c770bca7a5902f9924b629ac886b4c08956be6dfbc36b"
+  url "https://sqlite.org/2016/sqlite-autoconf-3110000.tar.gz"
+  version "3.11.0"
+  sha256 "508d4dcbcf7a7181e95c717a1dc4ae3c0880b3d593be0c4b40abb6c3a0e201fb"
+  revision 1
 
   bottle do
     cellar :any
-    sha256 "87728b4a68575b2b26b21b20f9e175342dd951e5c723e3730cdfe094219d7870" => :el_capitan
-    sha256 "5904d6943b66ae30f2d1c2add3c39c23eeeec802adfb52d589a0baede082349a" => :yosemite
-    sha256 "26ca0151df66630ad513d3280fc010eeba4a8587143c8b3840916ded8717d889" => :mavericks
+    sha256 "6098794c163ac80a69a114df47760597e0e5c62e9be495cb8e84137bc0cc7e99" => :el_capitan
+    sha256 "53838ce48a237a001d1e9fe9617d9bb4b926550f08f8c55f3b2b103874250ed2" => :yosemite
+    sha256 "b139227fcf4d30a7f7a84400a70b1c5853ddb3723e0af6d094d9f6ec9973b679" => :mavericks
   end
 
   keg_only :provided_by_osx, "OS X provides an older sqlite3."
@@ -48,13 +49,16 @@ class Sqlite < Formula
   end
 
   resource "docs" do
-    url "https://sqlite.org/2015/sqlite-doc-3090200.zip"
-    version "3.9.2"
-    sha256 "4b9ecb9d2b0424ca2a288184ee36fa16a11033400638117dd7c669ad2d39177c"
+    url "https://sqlite.org/2016/sqlite-doc-3110000.zip"
+    version "3.11.0"
+    sha256 "4a942d89d5bf0aa70c0a01267a52961632b27512c293eb6452f6efe909dcec50"
   end
 
   def install
     ENV.append "CPPFLAGS", "-DSQLITE_ENABLE_COLUMN_METADATA=1"
+    # Default value of MAX_VARIABLE_NUMBER is 999 which is too low for many
+    # applications. Set to 250000 (Same value used in Debian and Ubuntu).
+    ENV.append "CPPFLAGS", "-DSQLITE_MAX_VARIABLE_NUMBER=250000"
     ENV.append "CPPFLAGS", "-DSQLITE_ENABLE_RTREE=1" if build.with? "rtree"
     ENV.append "CPPFLAGS", "-DSQLITE_ENABLE_FTS3=1 -DSQLITE_ENABLE_FTS3_PARENTHESIS=1" if build.with? "fts"
     ENV.append "CPPFLAGS", "-DSQLITE_ENABLE_FTS5=1" if build.with? "fts5"
@@ -74,7 +78,9 @@ class Sqlite < Formula
 
     ENV.universal_binary if build.universal?
 
-    system "./configure", "--prefix=#{prefix}", "--disable-dependency-tracking", "--enable-dynamic-extensions"
+    system "./configure", "--prefix=#{prefix}",
+                          "--disable-dependency-tracking",
+                          "--enable-dynamic-extensions"
     system "make", "install"
 
     if build.with? "functions"
@@ -158,7 +164,7 @@ class Sqlite < Formula
       select name from students order by age asc;
     EOS
 
-    names = `#{bin}/sqlite3 < #{path}`.strip.split("\n")
+    names = shell_output("#{bin}/sqlite3 < #{path}").strip.split("\n")
     assert_equal %w[Sue Tim Bob], names
     assert_equal 0, $?.exitstatus
   end
