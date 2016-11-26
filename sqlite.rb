@@ -1,18 +1,18 @@
 class Sqlite < Formula
   desc "Command-line interface for SQLite"
   homepage "https://sqlite.org/"
-  url "https://sqlite.org/2016/sqlite-autoconf-3120200.tar.gz"
-  version "3.12.2"
-  sha256 "fd00770c9afd39db555c78400e52f55e8bd6568c78be23561abb472a22d09abb"
+  url "https://sqlite.org/2016/sqlite-autoconf-3150100.tar.gz"
+  version "3.15.1"
+  sha256 "5dfa89b7697ee3c2ac7b44e8e157e7f204bf999c866afcaa8bb1c7ff656ae2c5"
 
   bottle do
     cellar :any
-    sha256 "9a9994a425c28eaffef4bc42ae1c19fb323c42bb9472643eee29cd88bc407f99" => :el_capitan
-    sha256 "30c9cf4ddeb791248a565e7933ef52a91ee2171197190b9eae86b0764080e316" => :yosemite
-    sha256 "441d07d78376f2c87fc605c77541d15f786ecaaa93258464c8d054529796d59c" => :mavericks
+    sha256 "5930afd695e249a4aa24f7d62c6ec1fe01e384d374a777ceb142c71a5041e02c" => :sierra
+    sha256 "fe2bebe84ac29e945b56c2e462bb73c2d34c963cf3852b6d962aa419fc7ba20d" => :el_capitan
+    sha256 "aeacc77ade52894afbce93b3e9a29188c8f60cb451d7ade76c999b2e262df79c" => :yosemite
   end
 
-  keg_only :provided_by_osx, "OS X provides an older sqlite3."
+  keg_only :provided_by_osx, "macOS provides an older sqlite3."
 
   option :universal
   option "with-docs", "Install HTML documentation"
@@ -25,6 +25,7 @@ class Sqlite < Formula
   option "with-functions", "Enable more math and string functions for SQL queries"
   option "with-dbstat", "Enable the 'dbstat' virtual table"
   option "with-json1", "Enable the JSON1 extension"
+  option "with-session", "Enable the session extension"
   option "with-regexp", "Enable regular expressions for SQL queries"
 
   depends_on "readline" => :recommended
@@ -48,9 +49,9 @@ class Sqlite < Formula
   end
 
   resource "docs" do
-    url "https://sqlite.org/2016/sqlite-doc-3120200.zip"
-    version "3.12.2"
-    sha256 "67c640c4b01b961016717db61e3e43c63c33248c78ce0de9f10b88ea7ce97670"
+    url "https://sqlite.org/2016/sqlite-doc-3150100.zip"
+    version "3.15.1"
+    sha256 "121363c75da7f6c8988f70dfa5bed5f0f06b5c9d37b4e2230316c55a80760825"
   end
 
   def install
@@ -65,6 +66,7 @@ class Sqlite < Formula
     ENV.append "CPPFLAGS", "-DSQLITE_ENABLE_UNLOCK_NOTIFY=1" if build.with? "unlock-notify"
     ENV.append "CPPFLAGS", "-DSQLITE_ENABLE_DBSTAT_VTAB=1" if build.with? "dbstat"
     ENV.append "CPPFLAGS", "-DSQLITE_ENABLE_JSON1=1" if build.with? "json1"
+    ENV.append "CPPFLAGS", "-DSQLITE_ENABLE_PREUPDATE_HOOK=1 -DSQLITE_ENABLE_SESSION=1" if build.with? "session"
 
     if build.with? "icu4c"
       icu4c = Formula["icu4c"]
